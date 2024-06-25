@@ -19,6 +19,8 @@ function Login(props) {
         if (response.ok) {
             const user = await response.json();
             if (user.length > 0) {
+                localStorage.setItem("todoUser", JSON.stringify(user[0]));
+
                 setMessage("successfully logged in");
             } else {
                 setMessage("email/password incorrect");

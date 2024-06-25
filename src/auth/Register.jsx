@@ -21,12 +21,24 @@ function Register(props) {
             },
             body: JSON.stringify(formData)
         }
-        const response = await fetch("http://localhost:5000/users", config);
+        const checkUser = await fetch(`http://localhost:5000/users?email=${formData.email}`, { method: "GET" });
 
-        if (response.status === 201) {
-            setMessage("Registered Successfully")
+        if (checkUser.ok) {
+            const user = await checkUser.json();
+            if (user.length > 0) {
+                setMessage("user already exists");
+            } else {
+                const response = await fetch("http://localhost:5000/users", config);
+                if (response.status === 201) {
+                    const user = await response.json();
+                    localStorage.setItem("todoUser", JSON.stringify(user));
+                    setMessage("Registered Successfully")
+                } else {
+                    console.log("something went wrong");
+                }
+            }
         } else {
-            console.log("something went wrong");
+            setMessage("something went wrong, please try again");
         }
     }
 
