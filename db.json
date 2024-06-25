@@ -1,0 +1,23 @@
+{
+  "users": [
+    {
+      "name": "Aman",
+      "email": "aman@gmailsd.com",
+      "password": "admin",
+      "id": 1
+    },
+    {
+      "name": "Aman",
+      "email": "aman@gmail.com",
+      "password": "admin",
+      "id": 2
+    },
+    {
+      "name": "Vipin",
+      "email": "vipin@gmail.com",
+      "password": "admin",
+      "id": 3
+    }
+  ],
+  "tasks": []
+}
