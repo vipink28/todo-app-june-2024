@@ -37,7 +37,6 @@ function Navbar(props) {
                                     //   user ? user.name : ""
                                     user?.name
                                 }
-
                             </Link>
                             <ul className="dropdown-menu">
                                 <li><Link className="dropdown-item" to="#">Action</Link></li>

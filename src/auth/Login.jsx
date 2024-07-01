@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
+import AuthContext from './AuthContext';
 
 function Login(props) {
     const [formData, setFormData] = useState(null);
-    const [message, setMessage] = useState("");
+    const { message, loginUser } = useContext(AuthContext);
     const handleChange = (e) => {
         let { name, value } = e.target;
         setFormData((prev) => ({
@@ -12,23 +13,11 @@ function Login(props) {
         ))
     }
 
-    const submitForm = async (e) => {
+    const submitForm = (e) => {
         e.preventDefault();
-        const response = await fetch(`http://localhost:5000/users?email=${formData.email}&password=${formData.password}`, { method: "GET" });
-
-        if (response.ok) {
-            const user = await response.json();
-            if (user.length > 0) {
-                localStorage.setItem("todoUser", JSON.stringify(user[0]));
-
-                setMessage("successfully logged in");
-            } else {
-                setMessage("email/password incorrect");
-            }
-        } else {
-            setMessage("something went wrong");
-        }
+        loginUser(formData);
     }
+
 
     return (
         <form>
