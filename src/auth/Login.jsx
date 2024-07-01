@@ -1,9 +1,14 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import AuthContext from './AuthContext';
 
 function Login(props) {
     const [formData, setFormData] = useState(null);
-    const { message, loginUser } = useContext(AuthContext);
+    const { message, loginUser, setMessage } = useContext(AuthContext);
+
+    useEffect(() => {
+        setMessage("");
+    }, [])
+
     const handleChange = (e) => {
         let { name, value } = e.target;
         setFormData((prev) => ({

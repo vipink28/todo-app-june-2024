@@ -54,7 +54,10 @@ export const AuthProvider = ({ children }) => {
                     localStorage.setItem("todoUser", JSON.stringify(user));
                     setUser(user);
                     setMessage("Registered Successfully");
-                    navigate("/task-list");
+                    setTimeout(() => {
+                        navigate("/task-list");
+                    }, 3000)
+
                 } else {
                     console.log("something went wrong");
                 }
@@ -83,12 +86,21 @@ export const AuthProvider = ({ children }) => {
         }
     }
 
+    const logout = (e) => {
+        e.preventDefault();
+        localStorage.removeItem("todoUser");
+        setUser(null);
+        navigate("/login");
+    }
+
     return (
         <AuthContext.Provider value={{
             user,
             message,
             registerUser,
-            loginUser
+            loginUser,
+            logout,
+            setMessage
         }}>
             {children}
         </AuthContext.Provider>
