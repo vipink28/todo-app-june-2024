@@ -1,14 +1,25 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
+import TaskContext from '../context/TaskContext';
+import AuthContext from '../auth/AuthContext';
 
 function TaskForm(props) {
     const [formData, setFormData] = useState(null);
+    const { saveTask, tmessage } = useContext(TaskContext);
+    const { user } = useContext(AuthContext);
+
     const handleChange = (e) => {
         let { value, name } = e.target;
         setFormData((prev) => ({
             ...prev,
-            [name]: value
+            [name]: value,
+            userid: user.id
         }))
     }
+
+    // const addTask = () => {
+    //     saveTask(formData);
+    // }
+
     return (
         <div className='p-2'>
             <h3 className='text-white'>Create Task</h3>
@@ -26,9 +37,9 @@ function TaskForm(props) {
                         <label className='form-label'>Description</label>
                         <textarea name="description" className='form-control' rows="10" onChange={handleChange}></textarea>
                     </div>
-
+                    <p>{tmessage}</p>
                     <div>
-                        <button>Create Task</button>
+                        <button onClick={() => { saveTask(formData) }}>Create Task</button>
                     </div>
                 </div>
             </div>
