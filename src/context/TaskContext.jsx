@@ -1,7 +1,13 @@
-import { createContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
+import AuthContext from "../auth/AuthContext";
 const TaskContext = createContext();
 export const TaskProvider = ({ children }) => {
     const [tmessage, setTmessage] = useState("");
+    const { user } = useContext(AuthContext);
+
+    const [allTasks, setAllTasks] = useState(null);
+    const [recentTasks, setRecentTasks] = useState(null);
+    const [latestTask, setLatestTask] = useState(null);
 
     // saveTask
     const saveTask = async (formData) => {
@@ -24,6 +30,35 @@ export const TaskProvider = ({ children }) => {
             console.log(error.message);
         }
     }
+
+
+    const getAllTasks = async (id) => {
+        try {
+            const response = await fetch(`http://localhost:5000/tasks?userid=${id}`, { method: "GET" });
+            if (!response.ok) {
+                throw new Error(`!HTTP error status: ${response.status}`);
+            }
+            const tasks = await response.json();
+            setAllTasks(tasks);
+            let recent = tasks.slice(-3);
+            setRecentTasks(recent);
+            let latest = tasks.slice(-1);
+            setLatestTask(latest);
+
+        } catch (error) {
+            console.log(error.message);
+        }
+    }
+
+    // useEffect only runs one time if no dependencies added.
+    useEffect(() => {
+        if (user) {
+            getAllTasks(user.id);
+        }
+    }, [user]);
+
+
+
 
     return (
         <TaskContext.Provider value={{

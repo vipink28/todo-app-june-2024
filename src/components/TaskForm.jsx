@@ -12,7 +12,8 @@ function TaskForm(props) {
         setFormData((prev) => ({
             ...prev,
             [name]: value,
-            userid: user.id
+            userid: user.id,
+            modifiedon: Date()
         }))
     }
 
@@ -39,7 +40,7 @@ function TaskForm(props) {
                     </div>
                     <p>{tmessage}</p>
                     <div>
-                        <button onClick={() => { saveTask(formData) }}>Create Task</button>
+                        <button className='btn btn-primary' onClick={() => { saveTask(formData) }}>Create Task</button>
                     </div>
                 </div>
             </div>
