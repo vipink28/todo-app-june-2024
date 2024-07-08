@@ -6,6 +6,9 @@ function TaskForm(props) {
     const [formData, setFormData] = useState(null);
     const { saveTask, tmessage } = useContext(TaskContext);
     const { user } = useContext(AuthContext);
+    const { isUpdate, setIsUpdate } = props;
+
+
 
     const handleChange = (e) => {
         let { value, name } = e.target;
@@ -21,9 +24,13 @@ function TaskForm(props) {
     //     saveTask(formData);
     // }
 
+    const onCancel = () => {
+        setIsUpdate(false);
+    }
+
     return (
         <div className='p-2'>
-            <h3 className='text-white'>Create Task</h3>
+            <h3 className='text-white'>{isUpdate ? "Update Task" : "Create Task"}</h3>
             <div className='card'>
                 <div className='card-body'>
                     <div className='mb-3'>
@@ -40,7 +47,14 @@ function TaskForm(props) {
                     </div>
                     <p>{tmessage}</p>
                     <div>
-                        <button className='btn btn-primary' onClick={() => { saveTask(formData) }}>Create Task</button>
+                        {
+                            isUpdate ?
+                                <>
+                                    <button className='btn btn-primary me-2'>Update Task</button>
+                                    <button className='btn btn-warning' onClick={onCancel}>Cancel</button>
+                                </> :
+                                <button className='btn btn-primary' onClick={() => { saveTask(formData) }}>Create Task</button>
+                        }
                     </div>
                 </div>
             </div>

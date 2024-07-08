@@ -25,12 +25,12 @@ export const TaskProvider = ({ children }) => {
                 throw new Error(`!Http Error status: ${response.status}`);
             }
             setTmessage("Task created successfully");
+            getAllTasks(user.id);
 
         } catch (error) {
             console.log(error.message);
         }
     }
-
 
     const getAllTasks = async (id) => {
         try {
@@ -42,7 +42,7 @@ export const TaskProvider = ({ children }) => {
             setAllTasks(tasks);
             let recent = tasks.slice(-3);
             setRecentTasks(recent);
-            let latest = tasks.slice(-1);
+            let latest = tasks[tasks.length - 1];
             setLatestTask(latest);
 
         } catch (error) {
@@ -57,13 +57,13 @@ export const TaskProvider = ({ children }) => {
         }
     }, [user]);
 
-
-
-
     return (
         <TaskContext.Provider value={{
             saveTask,
-            tmessage
+            tmessage,
+            allTasks,
+            recentTasks,
+            latestTask
         }}>
             {children}
         </TaskContext.Provider>
