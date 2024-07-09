@@ -15,7 +15,7 @@ function CreateTask(props) {
             <div className='row h-100'>
                 <div className='col-lg-6 justify-content-center align-items-center bg-primary h-100 d-flex flex-column'>
                     <div className='w-50'>
-                        <TaskForm isUpdate={isUpdate} setIsUpdate={setIsUpdate} />
+                        <TaskForm isUpdate={isUpdate} setIsUpdate={setIsUpdate} data={latestTask} />
                     </div>
                 </div>
 

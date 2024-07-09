@@ -50,6 +50,30 @@ export const TaskProvider = ({ children }) => {
         }
     }
 
+
+    const updateTask = async (formData) => {
+        const config = {
+            method: "PATCH",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(formData)
+        }
+
+        try {
+            const response = await fetch(`http://localhost:5000/tasks/${formData.id}`, config);
+            if (!response.ok) {
+                throw new Error(`!HTTP error status: ${response.status}`);
+            }
+            setTmessage("Task updated successfully");
+            getAllTasks(user.id);
+
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
+
     // useEffect only runs one time if no dependencies added.
     useEffect(() => {
         if (user) {
@@ -63,7 +87,8 @@ export const TaskProvider = ({ children }) => {
             tmessage,
             allTasks,
             recentTasks,
-            latestTask
+            latestTask,
+            updateTask
         }}>
             {children}
         </TaskContext.Provider>
