@@ -19,7 +19,6 @@ function TaskList(props) {
     const init = { type: null, data: null };
     const { allTasks } = useContext(TaskContext);
     const [state, dispatch] = useReducer(reducer, init);
-
     return (
         <div className='container'>
             <div className='p-4 bg-primary text-white mt-5'>
@@ -65,5 +64,4 @@ function TaskList(props) {
         </div>
     );
 }
-
 export default TaskList;

@@ -12,13 +12,16 @@ function TaskForm(props) {
     const [formData, setFormData] = useState(init);
     const { saveTask, tmessage, updateTask } = useContext(TaskContext);
     const { user } = useContext(AuthContext);
-    const { isUpdate, setIsUpdate, data } = props;
+    const { isUpdate, setIsUpdate, data, closeBtn, isPopup } = props;
+    console.log(formData);
+
 
     useEffect(() => {
-        if (isUpdate) {
+        if (isUpdate && data) {
             setFormData(data);
         }
-    }, [isUpdate])
+    }, [isUpdate, data]);
+
 
     const handleChange = (e) => {
         let { value, name } = e.target;
@@ -35,7 +38,12 @@ function TaskForm(props) {
     // }
 
     const onCancel = () => {
-        setIsUpdate(false);
+        if (isPopup) {
+            closeBtn.current.click();
+        } else {
+            setIsUpdate(false);
+        }
+
         setFormData(init);
     }
 
