@@ -23,7 +23,6 @@ function CreateTask(props) {
                     <div className='card bg-primary text-white w-75'>
                         <div className='card-body'>
                             {
-
                                 latestTask ?
                                     <>
                                         <div className='d-flex justify-content-between'>
@@ -42,6 +41,19 @@ function CreateTask(props) {
                                     </>
                                     :
                                     <p>No tasks</p>
+                            }
+                        </div>
+                    </div>
+
+                    <div className='card bg-primary mt-5 text-white w-75'>
+                        <div className='card-body'>
+                            {
+                                recentTasks?.map((task) => (
+                                    <div className='d-flex justify-content-between border border-warning p-2'>
+                                        <p className='mb-0'>{task.title}</p>
+                                        <p className='mb-0'>{task.duedate}</p>
+                                    </div>
+                                ))
                             }
                         </div>
                     </div>
