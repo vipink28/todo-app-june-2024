@@ -13,7 +13,6 @@ function TaskForm(props) {
     const { saveTask, tmessage, updateTask } = useContext(TaskContext);
     const { user } = useContext(AuthContext);
     const { isUpdate, setIsUpdate, data, closeBtn, isPopup } = props;
-    console.log(formData);
 
 
     useEffect(() => {

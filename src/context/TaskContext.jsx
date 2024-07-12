@@ -74,6 +74,27 @@ export const TaskProvider = ({ children }) => {
     }
 
 
+    const deleteTask = async (formData) => {
+        const config = {
+            method: "DELETE"
+        }
+
+        try {
+            const response = await fetch(`http://localhost:5000/tasks/${formData.id}`, config);
+            if (!response.ok) {
+                throw new Error(`!HTTP error status: ${response.status}`);
+            }
+            setTmessage("Task Deleted successfully");
+            getAllTasks(user.id);
+
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
+
+
+
     // useEffect only runs one time if no dependencies added.
     useEffect(() => {
         if (user) {
@@ -88,7 +109,8 @@ export const TaskProvider = ({ children }) => {
             allTasks,
             recentTasks,
             latestTask,
-            updateTask
+            updateTask,
+            deleteTask
         }}>
             {children}
         </TaskContext.Provider>

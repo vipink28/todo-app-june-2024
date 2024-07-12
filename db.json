@@ -21,22 +21,6 @@
   ],
   "tasks": [
     {
-      "title": "Meeting With client",
-      "userid": 1,
-      "modifiedon": "Fri Jul 12 2024 11:21:49 GMT+0530 (India Standard Time)",
-      "duedate": "2024-08-02T12:56",
-      "description": "Meeting with client for new project",
-      "id": 1
-    },
-    {
-      "title": "Bill Payment",
-      "userid": 1,
-      "modifiedon": "Thu Jul 04 2024 11:10:47 GMT+0530 (India Standard Time)",
-      "duedate": "2024-08-17T15:56",
-      "description": "Pay office electricity bill.",
-      "id": 2
-    },
-    {
       "title": "Grocery",
       "userid": 1,
       "modifiedon": "Thu Jul 04 2024 11:11:18 GMT+0530 (India Standard Time)",
