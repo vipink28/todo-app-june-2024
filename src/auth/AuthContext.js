@@ -93,6 +93,31 @@ export const AuthProvider = ({ children }) => {
         navigate("/login");
     }
 
+
+    const updateUser = async (formData) => {
+        const config = {
+            method: "PATCH",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(formData)
+        }
+
+        try {
+            const response = await fetch(`http://localhost:5000/users/${formData.id}`, config);
+            if (!response.ok) {
+                throw new Error(`!HTTP error status: ${response.status}`);
+            }
+            setMessage("User Successfully updated successfully");
+
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
+
+
+
     return (
         <AuthContext.Provider value={{
             user,
@@ -100,7 +125,8 @@ export const AuthProvider = ({ children }) => {
             registerUser,
             loginUser,
             logout,
-            setMessage
+            setMessage,
+            updateUser
         }}>
             {children}
         </AuthContext.Provider>

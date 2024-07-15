@@ -13,6 +13,8 @@ import Register from './auth/Register';
 import { AuthProvider } from './auth/AuthContext';
 import ProtectedRoute from './auth/ProtectedRoute';
 import { TaskProvider } from './context/TaskContext';
+import AdminLayout from './layout/AdminLayout';
+import Dashboard from './layout/Dashboard';
 
 function App() {
   return (
@@ -30,6 +32,9 @@ function App() {
             <Route path='/task-list' element={<ProtectedRoute> <TaskList /></ProtectedRoute>}></Route>
             <Route path='/create-task' element={<ProtectedRoute><CreateTask /></ProtectedRoute>}></Route>
             <Route path='/profile' element={<ProtectedRoute> <Profile /></ProtectedRoute>}></Route>
+            <Route path='/admin' element={<AdminLayout />}>
+              <Route path='/admin/dashboard' element={<Dashboard />}></Route>
+            </Route>
             <Route path='*' element={<PageNotFound />}></Route>
           </Routes>
         </TaskProvider>

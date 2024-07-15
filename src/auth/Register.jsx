@@ -13,7 +13,8 @@ function Register(props) {
         let { name, value } = e.target;
         setFormData((prev) => ({
             ...prev,
-            [name]: value
+            [name]: value,
+            role: "user"
         }
         ))
     }
