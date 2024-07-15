@@ -6,3 +6,16 @@ export const formatDate = (dateString) => {
     ${date.getFullYear()} 
     ${date.toLocaleString("en-US", { hour: 'numeric', minute: 'numeric', hour12: true })}`
 }
+
+export const convertBase64 = (file) => {
+    return new Promise((resolve, reject) => {
+        const fileReader = new FileReader();
+        fileReader.readAsDataURL(file);
+        fileReader.onload = () => {
+            resolve(fileReader.result);
+        };
+        fileReader.onerror = (error) => {
+            reject(error);
+        };
+    });
+};
